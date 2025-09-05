@@ -216,8 +216,15 @@ body {
         }
 
         .badge {
-            @apply inline-block rounded-full bg-white text-black px-4 py-2 text-sm font-medium mb-8;
-        }
+    @apply inline-block rounded-full px-6 py-2 text-sm font-semibold mb-8;
+    background-color: #ffffff; /* clean white */
+    color: #1f1f1f; /* elegant dark text */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* subtle depth */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* very soft border for refinement */
+    letter-spacing: 0.6px; /* sophisticated spacing */
+    text-transform: uppercase; 
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* sleek modern font */
+}
 
         .top-grid {
             @apply grid grid-cols-1 xl:grid-cols-12 gap-5 mb-5 md:px-0 px-5;

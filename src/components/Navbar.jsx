@@ -32,7 +32,7 @@ const Navbar = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }}>
                 <img src='/images/logo.png' alt='logo' className='w-[80px] h-[80px] rounded-full object-cover'/>
-                <p>Velvet Pour</p>
+                <p>Sip With Pranav</p>
             </a>
 
             <ul>

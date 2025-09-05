@@ -70,7 +70,7 @@ const Hero = () => {
 
       gsap.to(line, {
         y: '+=200',
-        duration: 4 + Math.random() * 6,
+        duration: 2.5 + Math.random() * 6,
         repeat: -1,
         ease: 'none',
         delay: Math.random() * 3
@@ -88,7 +88,7 @@ const Hero = () => {
         <div className="content" style={{ position: 'relative', zIndex: 2 }}>
           <div className="space-y-5 hidden md:block">
             <p>Cool. Crisp. Classic</p>
-            <p className="subtitle">Sip the spirit <br /> of Summer</p>
+            <p className="subtitle">Sip the spirit <br /> of Season</p>
           </div>
           <div className="view-cocktails">
             <p className="subtitle">

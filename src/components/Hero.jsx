@@ -41,10 +41,10 @@ const Hero = () => {
     .to('.left-leaf', { y: -200 }, 0)
   }, [])
 
-  // ==== Minimal subtle mint-teal streaks effect ====
+  // ==== Mint-Teal Streaks Effect (unchanged) ====
   useEffect(() => {
-    const content = document.querySelector('#hero .content')
-    if (!content) return
+    const hero = document.querySelector('#hero')
+    if (!hero) return
 
     const streaksContainer = document.createElement('div')
     streaksContainer.style.position = 'absolute'
@@ -55,7 +55,7 @@ const Hero = () => {
     streaksContainer.style.pointerEvents = 'none'
     streaksContainer.style.overflow = 'hidden'
     streaksContainer.style.zIndex = 0
-    content.appendChild(streaksContainer)
+    hero.appendChild(streaksContainer)
 
     for (let i = 0; i < 10; i++) {
       const line = document.createElement('div')
@@ -64,13 +64,13 @@ const Hero = () => {
       line.style.left = `${Math.random() * 100}%`
       line.style.width = '1px'
       line.style.height = `${50 + Math.random() * 50}px`
-      line.style.background = 'rgba(0,255,200,0.07)' // subtle mint-teal tint
+      line.style.background = 'rgba(0,255,200,0.07)'
       line.style.borderRadius = '1px'
       streaksContainer.appendChild(line)
 
       gsap.to(line, {
         y: '+=200',
-        duration: 2.5 + Math.random() * 6,
+        duration: 1.5 + Math.random() * 6,
         repeat: -1,
         ease: 'none',
         delay: Math.random() * 3
@@ -78,9 +78,53 @@ const Hero = () => {
     }
   }, [])
 
+  // ==== Subtle Water Droplets Effect (updated only) ====
+  useEffect(() => {
+    const hero = document.querySelector('#hero')
+    if (!hero) return
+
+    const dropletsContainer = document.createElement('div')
+    dropletsContainer.style.position = 'absolute'
+    dropletsContainer.style.top = 0
+    dropletsContainer.style.left = 0
+    dropletsContainer.style.width = '100%'
+    dropletsContainer.style.height = '100%'
+    dropletsContainer.style.pointerEvents = 'none'
+    dropletsContainer.style.overflow = 'hidden'
+    dropletsContainer.style.zIndex = 1 // behind text and leaves
+    hero.appendChild(dropletsContainer)
+
+    for (let i = 0; i < 15; i++) { // subtle but visible
+      const droplet = document.createElement('div')
+      droplet.style.position = 'absolute'
+      droplet.style.top = `${Math.random() * 100}%`
+      droplet.style.left = `${Math.random() * 100}%`
+      droplet.style.width = '2.5px'
+      droplet.style.height = '2.5px'
+      droplet.style.borderRadius = '50%'
+      droplet.style.background = 'rgba(180,220,255,0.25)' // subtle visibility
+      dropletsContainer.appendChild(droplet)
+
+      gsap.to(droplet, {
+        y: '+=80',
+        x: '+=120',
+        opacity: 0,
+        duration: 3.5 + Math.random() * 3,
+        repeat: -1,
+        ease: 'linear',
+        delay: Math.random() * 2,
+        onRepeat: () => {
+          droplet.style.top = '5px'
+          droplet.style.left = `${Math.random() * 100}%`
+          droplet.style.opacity = 0.25
+        }
+      })
+    }
+  }, [])
+
   return (
-    <section id="hero" className="noisy">
-      <h1 className="title" style={{ position: 'relative', zIndex: 1 }}>MOJITO</h1>
+    <section id="hero" className="noisy" style={{ position: 'relative', overflow: 'hidden' }}>
+      <h1 className="title" style={{ position: 'relative', zIndex: 2 }}>MOJITO</h1>
       <img src="/images/hero-left-leaf.png" alt="left-leaf" className="left-leaf" />
       <img src="/images/hero-right-leaf.png" alt="right-leaf" className="right-leaf" />
 

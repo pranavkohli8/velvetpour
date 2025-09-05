@@ -22,24 +22,21 @@ const Contact = () => {
         timeline.from(titleSplit.words, { opacity: 0, yPercent: 100, stagger: 0.02 })
                 .from('#contact h3, #contact p', { opacity: 0, yPercent: 100, stagger: 0.02 });
 
-        // Right leaf animation
-        gsap.set('#f-right-leaf', { y: isMobile ? 10 : 20 });
-
+        // Animate leaves
         gsap.to('#f-right-leaf', {
             rotation: 5,
-            y: isMobile ? '+=5' : '+=10',
-            x: isMobile ? 2 : 5,
+            y: isMobile ? '+=8' : '+=20',
+            x: isMobile ? '+=2' : '+=5',
             duration: isMobile ? 1.5 : 2,
             yoyo: true,
             repeat: -1,
             ease: 'sine.inOut'
         });
 
-        // Left leaf animation
         gsap.to('#f-left-leaf', {
             rotation: -5,
-            y: isMobile ? -5 : -10,
-            x: isMobile ? -2 : -5,
+            y: isMobile ? '+=8' : '+=20',
+            x: isMobile ? '-=2' : '-=5',
             duration: isMobile ? 1.8 : 2.5,
             yoyo: true,
             repeat: -1,
@@ -47,12 +44,37 @@ const Contact = () => {
         });
     });
 
-    return (
-        <footer id="contact">
-            <img src="/images/footer-right-leaf.png" alt="leaf-right" id="f-right-leaf"/>
-            <img src="/images/footer-left-leaf.png" alt="leaf-left" id="f-left-leaf"/>
+    // Mobile-only leaf adjustments
+    const rightLeafStyle = isMobile ? {
+        position: 'absolute',
+        top: '20px',
+        right: '10px',
+        width: '50px',
+        height: 'auto',
+        zIndex: 0
+    } : {}
 
-            <div className='content'>
+    const leftLeafStyle = isMobile ? {
+        position: 'absolute',
+        bottom: '160px', // above disclaimer
+        left: '10px',
+        width: '50px',
+        height: 'auto',
+        zIndex: 0
+    } : {}
+
+    const contentStyle = {
+        position: 'relative',
+        zIndex: 1,
+        padding: isMobile ? '100px 20px 180px' : '40px 60px', // extra bottom space for mobile leaves
+    }
+
+    return (
+        <footer id="contact" style={{ position: 'relative' }}>
+            <img src="/images/footer-right-leaf.png" alt="leaf-right" id="f-right-leaf" style={rightLeafStyle}/>
+            <img src="/images/footer-left-leaf.png" alt="leaf-left" id="f-left-leaf" style={leftLeafStyle}/>
+
+            <div className='content' style={contentStyle}>
                 <h2 style={{ marginTop: isMobile ? '70px' : '0' }}>Where to find us</h2>
                 
                 <div>
@@ -77,7 +99,7 @@ const Contact = () => {
 
                 <div>
                     <h3>Socials</h3>
-                    <div className='flex-center gap-5'>
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
                         {socials.map((social) => (
                             <a
                                 key={social.name}
@@ -86,7 +108,7 @@ const Contact = () => {
                                 rel='noopener noreferrer'
                                 aria-label={social.name}
                             >
-                                <img src={social.icon} alt={social.name}/>
+                                <img src={social.icon} alt={social.name} style={{ width: '25px', height: '25px' }}/>
                             </a>
                         ))}
                     </div>
@@ -94,9 +116,8 @@ const Contact = () => {
 
                 <p>coded by Pranav Kohli @2025</p>
 
-                {/* Humorous disclaimer */}
                 <p style={{ fontSize: '11px', color: '#888', marginTop: '10px' }}>
-                    Disclaimer: This website just for portfolio purpose. The bar is purely imaginary — I don’t actually serve cocktails nor drink, but i do serve lines of code.
+                    Disclaimer: This website just for portfolio purposes. The bar is purely imaginary — I don’t actually serve cocktails nor drink, but I do serve lines of code.
                 </p>
             </div>
         </footer>

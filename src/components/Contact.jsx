@@ -22,7 +22,7 @@ const Contact = () => {
         timeline.from(titleSplit.words, { opacity: 0, yPercent: 100, stagger: 0.02 })
                 .from('#contact h3, #contact p', { opacity: 0, yPercent: 100, stagger: 0.02 });
 
-        // Animate leaves
+        // Animate right leaf (gentle sway)
         gsap.to('#f-right-leaf', {
             rotation: 5,
             y: isMobile ? '+=8' : '+=20',
@@ -33,11 +33,11 @@ const Contact = () => {
             ease: 'sine.inOut'
         });
 
+        // Animate left leaf (whisper effect)
         gsap.to('#f-left-leaf', {
-            rotation: -5,
-            y: isMobile ? '+=8' : '+=20',
-            x: isMobile ? '-=2' : '-=5',
-            duration: isMobile ? 1.8 : 2.5,
+            rotation: 10,                                 // swing softly
+            y: isMobile ? '+=6' : '+=12',                 // subtle up-down
+            duration: 3,                                  // slower, calmer
             yoyo: true,
             repeat: -1,
             ease: 'sine.inOut'

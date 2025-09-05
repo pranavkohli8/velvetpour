@@ -99,17 +99,17 @@ const Hero = () => {
       droplet.style.position = 'absolute'
       droplet.style.top = `${Math.random() * 100}%`
       droplet.style.left = `${Math.random() * 100}%`
-      droplet.style.width = '2.5px'
-      droplet.style.height = '2.5px'
+      droplet.style.width = '3px'
+      droplet.style.height = '3px'
       droplet.style.borderRadius = '50%'
       droplet.style.background = 'rgba(180,220,255,0.25)' // subtle visibility
       dropletsContainer.appendChild(droplet)
 
       gsap.to(droplet, {
-        y: '+=80',
-        x: '+=120',
+        y: '+=50',
+        x: '+=50',
         opacity: 0,
-        duration: 3.5 + Math.random() * 3,
+        duration: 0 + Math.random() * 3,
         repeat: -1,
         ease: 'linear',
         delay: Math.random() * 2,

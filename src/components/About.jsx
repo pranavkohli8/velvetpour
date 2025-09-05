@@ -87,9 +87,11 @@ const About = () => {
           <img
             src="/images/abt5.png"
             alt="grid-img-5"
-            className="w-full h-auto object-cover rounded"
+            className="w-full h-auto object-cover rounded cursor-pointer"
+            onClick={() => window.location.href = '/404'} // your 404 route
           />
         </div>
+
       </div>
 
       {/* Bottom Grid */}

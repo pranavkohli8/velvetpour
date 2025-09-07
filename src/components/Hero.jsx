@@ -41,7 +41,7 @@ const Hero = () => {
     .to('.left-leaf', { y: -200 }, 0)
   }, [])
 
-  // ==== Mint-Teal Streaks Effect (unchanged) ====
+  // ==== Mint-Teal Streaks Effect ====
   useEffect(() => {
     const hero = document.querySelector('#hero')
     if (!hero) return
@@ -62,9 +62,9 @@ const Hero = () => {
       line.style.position = 'absolute'
       line.style.top = `${Math.random() * 100}%`
       line.style.left = `${Math.random() * 100}%`
-      line.style.width = '1px'
-      line.style.height = `${50 + Math.random() * 50}px`
-      line.style.background = 'rgba(0,255,200,0.07)'
+      line.style.width = '1.1px'
+      line.style.height = `${25 + Math.random() * 50}px`
+      line.style.background = 'rgba(0, 140, 255, 0.11)'
       line.style.borderRadius = '1px'
       streaksContainer.appendChild(line)
 
@@ -78,7 +78,7 @@ const Hero = () => {
     }
   }, [])
 
-  // ==== Subtle Water Droplets Effect (updated only) ====
+  // ==== Subtle Water Droplets Effect ====
   useEffect(() => {
     const hero = document.querySelector('#hero')
     if (!hero) return
@@ -91,10 +91,10 @@ const Hero = () => {
     dropletsContainer.style.height = '100%'
     dropletsContainer.style.pointerEvents = 'none'
     dropletsContainer.style.overflow = 'hidden'
-    dropletsContainer.style.zIndex = 1 // behind text and leaves
+    dropletsContainer.style.zIndex = 1
     hero.appendChild(dropletsContainer)
 
-    for (let i = 0; i < 15; i++) { // subtle but visible
+    for (let i = 0; i < 15; i++) {
       const droplet = document.createElement('div')
       droplet.style.position = 'absolute'
       droplet.style.top = `${Math.random() * 100}%`
@@ -102,7 +102,7 @@ const Hero = () => {
       droplet.style.width = '3px'
       droplet.style.height = '3px'
       droplet.style.borderRadius = '50%'
-      droplet.style.background = 'rgba(180,220,255,0.25)' // subtle visibility
+      droplet.style.background = 'rgba(95, 158, 160, 1)'
       dropletsContainer.appendChild(droplet)
 
       gsap.to(droplet, {
@@ -110,7 +110,7 @@ const Hero = () => {
         x: '+=50',
         opacity: 0,
         duration: 0 + Math.random() * 3,
-        repeat: -1,
+        repeat: 4,
         ease: 'linear',
         delay: Math.random() * 2,
         onRepeat: () => {
@@ -122,9 +122,39 @@ const Hero = () => {
     }
   }, [])
 
+  // ==== MOJITO Hover Effect ====
+  const handleMouseMove = (e) => {
+    const charElements = document.querySelectorAll('.title .text-gradient')
+    charElements.forEach((char) => {
+      const rect = char.getBoundingClientRect()
+      const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+      )
+      const maxDistance = 100
+      const brightness = 1 + Math.max(0, (maxDistance - distance) / 2)
+      gsap.to(char, { filter: `brightness(${brightness})`, duration: 0.2 })
+    })
+  }
+
+  const handleMouseLeave = () => {
+    const charElements = document.querySelectorAll('.title .text-gradient')
+    charElements.forEach((char) => {
+      gsap.to(char, { filter: 'brightness(1)', duration: 0.4 })
+    })
+  }
+
   return (
     <section id="hero" className="noisy" style={{ position: 'relative', overflow: 'hidden' }}>
-      <h1 className="title" style={{ position: 'relative', zIndex: 2 }}>MOJITO</h1>
+      <h1
+        className="title"
+        style={{ position: 'relative', zIndex: 2, cursor: 'default' }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        MOJITO
+      </h1>
+
       <img src="/images/hero-left-leaf.png" alt="left-leaf" className="left-leaf" />
       <img src="/images/hero-right-leaf.png" alt="right-leaf" className="right-leaf" />
 

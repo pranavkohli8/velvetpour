@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <nav>
-        <div>
+        <div className="flex items-center justify-between md:justify-between gap-2 md:gap-8 max-w-[1200px] mx-auto">
             <a href='#' className='flex items-center gap-2' onClick={(e) => {
     e.preventDefault(); // prevents adding # to URL
     window.scrollTo({ top: 0, behavior: 'smooth' });
